@@ -2,9 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEngine.UI;
 
 public class Pathfinder : MonoBehaviour
 {
+    public Text datastructureText;
+    public Text totalTimeText;
+    public Text averageTimeText;
     public Transform seeker, target;
     public bool useHeap;
     long _totalRunTime = 0;
@@ -40,9 +44,13 @@ public class Pathfinder : MonoBehaviour
         }
 
         string dataStructure = (useHeap) ? "Heap" : "Array";
+        float averageRunTime = Mathf.Round((_totalRunTime / (float)count) * 100f)/100f;
+        datastructureText.text += dataStructure;
+        totalTimeText.text += _totalRunTime.ToString() + "ms";
+        averageTimeText.text += averageRunTime.ToString() + "ms";
         print("Data Structure: " + dataStructure);
         print("Total Run Time: " + _totalRunTime + " ms");
-        print("Averge Run Time: " + _totalRunTime/(float)count + " ms");
+        print("Averge Run Time: " + averageRunTime + " ms");
     }
 
     void FindPath(Vector3 startPos, Vector3 targetPos)
